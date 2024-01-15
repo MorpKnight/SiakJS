@@ -6,7 +6,6 @@ const userData = {
 }
 
 const dataMatkul = [
-    // example, caranya cek di inspect element
     {
         kode: "ENEE604023_01.03.04.01-2020",
         kelas: 0,
