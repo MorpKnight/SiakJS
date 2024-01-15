@@ -40,4 +40,4 @@ SiakJS is a NodeJS project to automate the process of selecting courses in SIAK-
 
     ```
     Shown in preview below
-    
+    ![](https://github.com/MorpKnight/SiakJS/blob/main/howto.gif)
