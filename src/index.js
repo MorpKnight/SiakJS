@@ -1,18 +1,38 @@
 import puppeteer from 'puppeteer';
 
 const userData = {
-    username: "pass username here",
-    password: "pass password here",
+    username: "giovan.christoffel",
+    password: "Giovan2103",
 }
 
 const dataMatkul = [
     {
-        kode: "ENEE604023_01.03.04.01-2020",
-        kelas: 0,
+        kode: "ENCE604015_02.03.04.01-2020",
+        kelas: 1,
     },
     {
-        kode: "ENGE600004_01.01.04.01-2020",
-        kelas: 3,
+        kode: "ENCE604011_02.03.04.01-2020",
+        kelas: 1,
+    },
+    {
+        kode: "ENCE604015_02.03.04.01-2020",
+        kelas: 0
+    },
+    {
+        kode: "ENNE603008_02.03.04.01-2020",
+        kelas: 0
+    },
+    {
+        kode: "ENCE604016_02.03.04.01-2020",
+        kelas: 0
+    },
+    {
+        kode: "ENCE604014_02.03.04.01-2020",
+        kelas: 0
+    },
+    {
+        kode: "ENCE604012_02.03.04.01-2020",
+        kelas: 1
     }
 ];
 
@@ -29,7 +49,7 @@ const dataMatkul = [
 
     while (await page.$('#u') === null) {
         await page.waitForTimeout(1000);
-        console.log('waiting for page to load...');
+        console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
         await page.screenshot({ path: 'screenshot/image.png' });
         await page.reload();
     }
@@ -41,21 +61,34 @@ const dataMatkul = [
 
     await page.goto("https://academic.ui.ac.id/main/CoursePlan/CoursePlanEdit");
 
+    await page.screenshot({ path: 'screenshot/image.png' });
+
+    while(await page.$('input[type="radio"]') === null) {
+        await page.waitForTimeout(1000);
+        console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
+        await page.screenshot({ path: 'screenshot/image.png' });
+        await page.reload();
+    }
+
     while (await page.$("h2[id='ti_h']") === null) {
         await page.waitForTimeout(1000);
-        console.log('waiting for page to load...');
+        console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
         await page.screenshot({ path: 'screenshot/image.png' });
         await page.reload();
     }
 
     await page.evaluate((dataMatkul) => {
         dataMatkul.map((item) => {
-            document.getElementsByName(`c[${item.kode}]`)[item.kelas].click();
+            try {
+                document.getElementsByName(`c[${item.kode}]`)[item.kelas].click();
+            } catch (err) {
+                console.log(err);
+            }
         });
     }, dataMatkul);
 
     await page.click('input[value="Simpan IRS"]');
-    
+
     await page.screenshot({ path: 'screenshot/image.png' });
     await browser.close();
     console.log('done');
