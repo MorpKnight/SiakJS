@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 
 const userData = {
     username: "giovan.christoffel",
-    password: "Giovan2103",
+    password: "HAHAHA",
 }
 
 const dataMatkul = [
