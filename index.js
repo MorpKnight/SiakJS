@@ -62,7 +62,7 @@ const client = async () => {
 
     while (await page.$('#u') === null) {
         await page.waitForTimeout(1000);
-        console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
+        // console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
         await page.reload();
     }
 
@@ -71,7 +71,7 @@ const client = async () => {
     await page.click('input[value="Login"]');
     while (page.url() === 'https://academic.ui.ac.id/main/Authentication/') {
         await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log(`${new Date().toLocaleTimeString()} | waiting for login...`);
+        // console.log(`${new Date().toLocaleTimeString()} | waiting for login...`);
         await page.reload();
     }
 
@@ -81,14 +81,14 @@ const client = async () => {
 
     while (await page.$('input[type="radio"]') === null) {
         await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
+        // console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
         await page.screenshot({ path: 'screenshot/image.png' });
         await page.reload();
     }
 
     while (await page.$("h2[id='ti_h']") === null) {
         await new Promise(resolve => setTimeout(resolve, 1000));
-        console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
+        // console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
         await page.screenshot({ path: 'screenshot/image.png' });
         await page.reload();
     }
