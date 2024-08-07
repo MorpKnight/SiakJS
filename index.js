@@ -61,7 +61,7 @@ const client = async () => {
     await page.goto('https://academic.ui.ac.id/main/Authentication/');
 
     while (await page.$('#u') === null) {
-        await page.waitForTimeout(1000);
+        await new Promise(resolve => setTimeout(resolve, 2000)).catch(err => console.log(err));
         // console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
         await page.reload();
     }
@@ -70,7 +70,7 @@ const client = async () => {
     await page.type('input[name="p"]', userData.password);
     await page.click('input[value="Login"]');
     while (page.url() === 'https://academic.ui.ac.id/main/Authentication/') {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 2000)).catch(err => console.log(err));
         // console.log(`${new Date().toLocaleTimeString()} | waiting for login...`);
         await page.reload();
     }
@@ -80,14 +80,14 @@ const client = async () => {
     await page.screenshot({ path: 'screenshot/image.png' });
 
     while (await page.$('input[type="radio"]') === null) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 5000)).catch(err => console.log(err));
         // console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
         await page.screenshot({ path: 'screenshot/image.png' });
         await page.reload();
     }
 
     while (await page.$("h2[id='ti_h']") === null) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 4000)).catch(err => console.log(err));
         // console.log(`${new Date().toLocaleTimeString()} | waiting for page to load...`);
         await page.screenshot({ path: 'screenshot/image.png' });
         await page.reload();
@@ -116,6 +116,6 @@ while(!success) {
     client();
     console.log(`${new Date().toLocaleTimeString()} | retrying... ${counter}`);
     
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000)).catch(err => console.log(err));
     counter++;
 }
